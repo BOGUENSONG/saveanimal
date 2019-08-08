@@ -20,16 +20,38 @@
             color: white;
             background-color: blueviolet;
         }
+        .selectBox{
+            width: 30%;
+        }
     </style>
 </head>
 <body>
 <div id="header">  </i> header</div>
-<div id="selectBox">selectBox
-    <select name="sido">
+<div id="selectBox">
+    <select name="sido" class="selectBox">
 <%--        <c:forEach var="i" items="${test1}">--%>
 <%--            <option value="<c:out value="${i[1]}"/>"><c:out value="${i[0]}"/></option>--%>
 <%--        </c:forEach>--%>
-    </select></div>
+    </select>
+    <select name="sido" class="selectBox">
+        <%--        <c:forEach var="i" items="${test1}">--%>
+        <%--            <option value="<c:out value="${i[1]}"/>"><c:out value="${i[0]}"/></option>--%>
+        <%--        </c:forEach>--%>
+    </select>
+    <select name="sido" class="selectBox">
+        <%--        <c:forEach var="i" items="${test1}">--%>
+        <%--            <option value="<c:out value="${i[1]}"/>"><c:out value="${i[0]}"/></option>--%>
+        <%--        </c:forEach>--%>
+    </select>
+
+</div>
+
+
+
+
+
+</div>
+
 <div id="petlist">list</div>
 <%--<div> 테스트 :<c:out value="${test2}"></c:out></div>--%>
 <%--<c:out value="${}"/>--%>
