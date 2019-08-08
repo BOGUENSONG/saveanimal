@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.xml.sax.SAXException;
 
+import javax.annotation.Resource;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class baseController {
 
 
+    @Resource(name="ApiToListService")
     private ApiToListService apiToListService;
 
     //주소창에 localhost:8080 치면, index.jsp를 매핑해준다.
@@ -25,10 +27,10 @@ public class baseController {
         return "index";
     }
     @RequestMapping(value = "/dogs")
-    public String dogindex(Model model ) {
+    public String dogindex(Model model ) throws IOException, SAXException, ParserConfigurationException {
 
-//        ArrayList sido = apiToListService.sido();
-//      model.addAttribute("sido",sido);
+        ArrayList sido2 = apiToListService.sido();
+        model.addAttribute("sido",sido2);
         return "animalList";
     }
 

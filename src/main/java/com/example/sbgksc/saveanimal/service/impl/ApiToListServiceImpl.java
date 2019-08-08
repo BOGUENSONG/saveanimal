@@ -1,6 +1,7 @@
 package com.example.sbgksc.saveanimal.service.impl;
 
 import com.example.sbgksc.saveanimal.service.ApiToListService;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -11,13 +12,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
-
+@Service("ApiToListService")
 public class ApiToListServiceImpl implements ApiToListService {
     static String key = "zxOaIwbPBgRjuyXZ68rmrBZInTfArAVYIP0FYxy7QRU%2BnqxZYWscmRnpvaNUmy7nrILp8XPZ9StvfD67MhiIxg%3D%3D";
     @Override
-    public ArrayList sido() {
-        ArrayList sido = new ArrayList();
-        try {
+    public ArrayList sido() throws ParserConfigurationException, IOException, SAXException {
+
+            ArrayList sido = new ArrayList();
             String url = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sido?ServiceKey=";
             url = url + key; //api키값 삽입
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
@@ -82,14 +83,15 @@ public class ApiToListServiceImpl implements ApiToListService {
                 }
                 sidodata.add(sigungu);
                 sido.add(sidodata);
+
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sido;
+
+            System.out.println("var : " + sido.size());
+            return sido;
+
     }
+
+
+
+
 }
