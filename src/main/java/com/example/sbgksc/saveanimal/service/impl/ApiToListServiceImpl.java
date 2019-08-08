@@ -64,7 +64,7 @@ public class ApiToListServiceImpl implements ApiToListService {
                     Document oodoc = dBuilder.parse(oourl);
                     oodoc.getDocumentElement().normalize();
                     NodeList oolistnm = oodoc.getElementsByTagName("careNm"); //보호소명
-                    NodeList oolistcd = oodoc.getElementsByTagName("carRegNo"); //보호소코드
+                    NodeList oolistcd = oodoc.getElementsByTagName("careRegNo"); //보호소코드
                     ArrayList bohoso = new ArrayList();
                     for (int k = 0; k < oolistnm.getLength(); k++) {
                         ArrayList bohosodata = new ArrayList();
