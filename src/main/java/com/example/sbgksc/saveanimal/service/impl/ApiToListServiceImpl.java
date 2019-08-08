@@ -77,7 +77,8 @@ public class ApiToListServiceImpl implements ApiToListService {
                         bohosodata.add(oovaluecd); //보호소코드 삽입
                         bohoso.add(bohosodata);
                     }
-                    sigungu.add(bohoso);
+                    sigungudata.add(bohoso);
+                    sigungu.add(sigungudata);
                 }
                 sidodata.add(sigungu);
                 sido.add(sidodata);
