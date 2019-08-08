@@ -16,5 +16,4 @@ public interface ApiToListService {
     // List[0][1] = 0123
     // List[1][0] = 대전
 
-
 }
