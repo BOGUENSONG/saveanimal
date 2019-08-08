@@ -27,6 +27,7 @@ public class ApiToListServiceImpl implements ApiToListService {
             doc.getDocumentElement().normalize();
             NodeList listnm = doc.getElementsByTagName("orgdownNm"); //시도 이름
             NodeList listcd = doc.getElementsByTagName("orgCd"); //시도 코드
+
             for (int i = 0; i < listnm.getLength(); i++) {
                 ArrayList sidodata = new ArrayList();
                 Node nodenm = listnm.item(i);
