@@ -5,15 +5,11 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
 
 
 public interface ApiToListService {
 
-    public ArrayList sido() throws ParserConfigurationException, IOException, SAXException;
-    // 시도 리스트
-    // List[0][0] = 서울
-    // List[0][1] = 0123
-    // List[1][0] = 대전
+    public Map<String, String> sido() throws ParserConfigurationException, IOException, SAXException;
 
 }
