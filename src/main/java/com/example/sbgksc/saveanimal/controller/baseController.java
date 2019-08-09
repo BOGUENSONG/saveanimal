@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 @Controller
 public class baseController {
@@ -28,8 +29,8 @@ public class baseController {
     @RequestMapping(value = "/dogs")
     public String dogindex(Model model ) throws IOException, SAXException, ParserConfigurationException {
 
-//        ArrayList sido = apiToListService.sido();
-//        model.addAttribute("sido",sido);
+        Map<String,String> sido = apiToListService.sido();
+        model.addAttribute("sido",sido);
         return "animalList";
     }
 
