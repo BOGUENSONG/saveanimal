@@ -1,5 +1,5 @@
 2019 Bottom-up Project 
-Saveaniaml
+Saveanimal
 
 14 BOGUEN SONG
 14 SUNCHANG KWON
