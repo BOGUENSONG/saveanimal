@@ -212,6 +212,7 @@ public class baseRestController {
             each.put("noticeComment", value); //특이사항 삽입
             list.add(each); //정보값 입력한 정보값리스트 삽입
         }
+        System.out.println(list.size());
         return list;
     }
 

@@ -70,7 +70,8 @@
             data: { "sigungu": $('#sigungu').val(), "bohoso": $('#bohoso').val(), "upkind": "417000"},
             success: function(data) {
                 $('#petlist').empty();
-                $('#petlist').html('<c:out value="${petList}"/>');
+                console.log(data.officetel[0]);
+
 
             },
             error:function(error){
