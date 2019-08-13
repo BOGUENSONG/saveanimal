@@ -13,6 +13,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,6 +70,143 @@ public class baseRestController {
             bohoso.put(valuecd, valuenm);
         }
         return bohoso;
+    }
+
+    @RequestMapping(value="/listReturn" , method= RequestMethod.GET)
+    public ArrayList listReturn(@RequestParam("sigungu")String sigungu, @RequestParam("bohoso")String bohoso, @RequestParam("upkind")String upkind) throws ParserConfigurationException, IOException, SAXException { //보호소 해시맵 리턴
+        ArrayList list = new ArrayList();
+        String url = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/shelter";
+        url = url + "?org_cd=" + sigungu;//시군구 코드삽입
+        url = url + "&care_reg_no=" + bohoso;//보호소 코드삽입 ("전체"라는 보호소값 생성바람, "전체"의 value는 ""로 설정)
+        url = url + "&numOfRows=" + "1000";
+        url = url + "&upkind=" + upkind; //축종코드 삽입
+        url = url + "&state=" + "notice"; //상태코드 삽입 notice = 공고중
+        Calendar today = Calendar.getInstance();
+        String nowDate = new java.text.SimpleDateFormat("yyyyMMdd").format(today.getTime()); //현재날짜
+        today.add(Calendar.MONTH , -1);
+        String preDate = new java.text.SimpleDateFormat("yyyyMMdd").format(today.getTime()); //한달전날짜
+        url = url + "&bgnde=" + preDate; //검색시작날짜 삽입(현재의 한달전날짜)
+        url = url + "&endde=" + nowDate; //검색종료날짜 삽입(현재날짜로)
+        url = url + "&ServiceKey=" + key; //api키값 삽입
+        DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+        Document doc = dBuilder.parse(url);
+        doc.getDocumentElement().normalize();
+        NodeList listdn = doc.getElementsByTagName("desertionNo"); //유기번호
+        NodeList listfn = doc.getElementsByTagName("filename"); //썸네일 이미지
+        NodeList listhd = doc.getElementsByTagName("happenDt"); //접수일
+        NodeList listhp = doc.getElementsByTagName("happenPlace"); //발견 장소
+        NodeList listkc = doc.getElementsByTagName("kindCd"); //품종
+        NodeList listag = doc.getElementsByTagName("age"); //나이
+        NodeList listwg = doc.getElementsByTagName("weight"); //무게
+        NodeList listnn = doc.getElementsByTagName("noticeNo"); //공고번호
+        NodeList listcc = doc.getElementsByTagName("colorCd"); //색상
+        NodeList listns = doc.getElementsByTagName("noticeSdt"); //공고시작일
+        NodeList listne = doc.getElementsByTagName("noticeEdt"); //공고종료일
+        NodeList listpf = doc.getElementsByTagName("popfile"); //이미지파일
+        NodeList listps = doc.getElementsByTagName("processState"); //상태
+        NodeList listsc = doc.getElementsByTagName("sexCd"); //성별
+        NodeList listsm = doc.getElementsByTagName("specialMark"); //특징
+        NodeList listcn = doc.getElementsByTagName("careNm"); //보호소이름
+        NodeList listct = doc.getElementsByTagName("careTel"); //보호소 전화번호
+        NodeList listca = doc.getElementsByTagName("careAddr"); //보호장소
+        NodeList liston = doc.getElementsByTagName("orgNm"); //관할기관
+        NodeList listch = doc.getElementsByTagName("chargeNm"); //담당자이름
+        NodeList listot = doc.getElementsByTagName("officetel"); //담당자 연락처
+        NodeList listnc = doc.getElementsByTagName("noticeComment"); //특이사항
+        for (int i = 0; i < listdn.getLength(); i++) {
+            ArrayList each = new ArrayList(); //하나의 유기동물 정보값리스트 생성
+            Node node = listdn.item(i);
+            Node temp= node.getFirstChild();
+            String value = temp.getNodeValue();
+            each.add(value); //유기번호 삽입
+            node = listfn.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //썸네일 이미지 삽입
+            node = listhd.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //접수일 삽입
+            node = listhp.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //발견장소 삽입
+            node = listkc.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //품종 삽입
+            node = listag.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //나이 삽입
+            node = listwg.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //무게 삽입
+            node = listnn.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //공고번호 삽입
+            node = listcc.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //색상 삽입
+            node = listns.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //공고시작일 삽입
+            node = listne.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //공고종료일 삽입
+            node = listpf.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //이미지파일 삽입
+            node = listps.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //상태 삽입
+            node = listsc.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //성별 삽입
+            node = listsm.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //특징 삽입
+            node = listcn.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //보호소이름 삽입
+            node = listct.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //보호서전화번호 삽입
+            node = listca.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //보호장소 삽입
+            node = liston.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //관할기관 삽입
+            node = listch.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //담당자이름 삽입
+            node = listot.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //담당자연락처 삽입
+            node = listnc.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.add(value); //특이사항 삽입
+            list.add(each); //정보값 입력한 정보값리스트 삽입
+        }
+        return list;
     }
 
 }
