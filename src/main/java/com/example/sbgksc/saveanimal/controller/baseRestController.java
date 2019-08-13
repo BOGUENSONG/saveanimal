@@ -81,7 +81,7 @@ public class baseRestController {
     @RequestMapping(value="/listReturn" , method= RequestMethod.GET)
     public ArrayList listReturn(@RequestParam("sigungu")String sigungu, @RequestParam("bohoso")String bohoso, @RequestParam("upkind")String upkind) throws ParserConfigurationException, IOException, SAXException { //보호소 해시맵 리턴
         ArrayList list = new ArrayList();
-        String url = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/shelter";
+        String url = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic";
         url = url + "?org_cd=" + sigungu;//시군구 코드삽입
         url = url + "&care_reg_no=" + bohoso;//보호소 코드삽입 ("전체"라는 보호소값 생성바람, "전체"의 value는 ""로 설정)
         url = url + "&numOfRows=" + "1000";
@@ -119,7 +119,6 @@ public class baseRestController {
         NodeList liston = doc.getElementsByTagName("orgNm"); //관할기관
         NodeList listch = doc.getElementsByTagName("chargeNm"); //담당자이름
         NodeList listot = doc.getElementsByTagName("officetel"); //담당자 연락처
-        NodeList listnc = doc.getElementsByTagName("noticeComment"); //특이사항
         for (int i = 0; i < listdn.getLength(); i++) {
             Map<String, String> each = new HashMap<>();
             Node node = listdn.item(i);
@@ -206,13 +205,8 @@ public class baseRestController {
             temp= node.getFirstChild();
             value = temp.getNodeValue();
             each.put("officetel", value); //담당자연락처 삽입
-            node = listnc.item(i);
-            temp= node.getFirstChild();
-            value = temp.getNodeValue();
-            each.put("noticeComment", value); //특이사항 삽입
             list.add(each); //정보값 입력한 정보값리스트 삽입
         }
-        System.out.println(list.size());
         return list;
     }
 
