@@ -115,95 +115,95 @@ public class baseRestController {
         NodeList listot = doc.getElementsByTagName("officetel"); //담당자 연락처
         NodeList listnc = doc.getElementsByTagName("noticeComment"); //특이사항
         for (int i = 0; i < listdn.getLength(); i++) {
-            ArrayList each = new ArrayList(); //하나의 유기동물 정보값리스트 생성
+            Map<String, String> each = new HashMap<>();
             Node node = listdn.item(i);
             Node temp= node.getFirstChild();
             String value = temp.getNodeValue();
-            each.add(value); //유기번호 삽입
+            each.put("desertionNo", value); //유기번호 삽입
             node = listfn.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //썸네일 이미지 삽입
+            each.put("filename", value); //썸네일 이미지 삽입
             node = listhd.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //접수일 삽입
+            each.put("happenDt", value); //접수일 삽입
             node = listhp.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //발견장소 삽입
+            each.put("happenPlace", value); //발견장소 삽입
             node = listkc.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //품종 삽입
+            each.put("kindCd", value); //품종 삽입
             node = listag.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //나이 삽입
+            each.put("age", value); //나이 삽입
             node = listwg.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //무게 삽입
+            each.put("weight", value); //무게 삽입
             node = listnn.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //공고번호 삽입
+            each.put("noticeNo", value); //공고번호 삽입
             node = listcc.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //색상 삽입
+            each.put("colorCd", value); //색상 삽입
             node = listns.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //공고시작일 삽입
+            each.put("noticeSdt", value); //공고시작일 삽입
             node = listne.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //공고종료일 삽입
+            each.put("noticeEdt", value); //공고종료일 삽입
             node = listpf.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //이미지파일 삽입
+            each.put("popfile", value); //이미지파일 삽입
             node = listps.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //상태 삽입
+            each.put("processState", value); //상태 삽입
             node = listsc.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //성별 삽입
+            each.put("sexCd", value); //성별 삽입
             node = listsm.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //특징 삽입
+            each.put("specialMark", value); //특징 삽입
             node = listcn.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //보호소이름 삽입
+            each.put("careNm", value); //보호소이름 삽입
             node = listct.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //보호서전화번호 삽입
+            each.put("careTel", value); //보호서전화번호 삽입
             node = listca.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //보호장소 삽입
+            each.put("careAddr", value); //보호장소 삽입
             node = liston.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //관할기관 삽입
+            each.put("orgNm", value); //관할기관 삽입
             node = listch.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //담당자이름 삽입
+            each.put("chargeNm", value); //담당자이름 삽입
             node = listot.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //담당자연락처 삽입
+            each.put("officetel", value); //담당자연락처 삽입
             node = listnc.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();
-            each.add(value); //특이사항 삽입
+            each.put("noticeComment", value); //특이사항 삽입
             list.add(each); //정보값 입력한 정보값리스트 삽입
         }
         return list;
