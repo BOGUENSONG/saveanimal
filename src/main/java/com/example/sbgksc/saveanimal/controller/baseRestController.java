@@ -207,6 +207,7 @@ public class baseRestController {
             each.put("officetel", value); //담당자연락처 삽입
             list.add(each); //정보값 입력한 정보값리스트 삽입
         }
+        System.out.println("리스트 크기: " + list.size());
         return list;
     }
 

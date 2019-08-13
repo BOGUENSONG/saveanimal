@@ -26,11 +26,29 @@ public class baseController {
 
         return "index";
     }
+
+    //    축종코드 리스트
+//   - 개 : 417000
+// - 고양이 : 422400
+// - 기타 : 429900
+
+
     @RequestMapping(value = "/dogs")
     public String dogindex(Model model ) throws IOException, SAXException, ParserConfigurationException {
 
         Map<String,String> sido = apiToListService.sido();
         model.addAttribute("sido",sido);
+        model.addAttribute("petkind","417000");
+        model.addAttribute("pet","강아지");
+        return "animalList";
+    }
+    @RequestMapping(value ="cats")
+    public String catindex(Model model ) throws IOException, SAXException, ParserConfigurationException {
+
+        Map<String,String> sido = apiToListService.sido();
+        model.addAttribute("sido",sido);
+        model.addAttribute("petkind","422400");
+        model.addAttribute("pet","고양이");
         return "animalList";
     }
 

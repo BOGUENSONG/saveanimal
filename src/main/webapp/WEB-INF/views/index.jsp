@@ -35,7 +35,7 @@
     <div id="title">전국 유기동물 보호현황</div> </div>
 <div id="btnWrap">
     <input type="button" value="강아지" class="button1" onclick="test1()">
-    <input type="button" value="고양이" class="button1">
+    <input type="button" value="고양이" class="button1" onclick="test2()">
     <br>
     <input type="button" value="기타동물" class="button2">
     <br>
@@ -44,6 +44,10 @@
 <script>
 function test1(){
     location.href = "/dogs";
+}
+function test2()
+{
+    location.href = "/cats";
 }
 </script>
 </body>

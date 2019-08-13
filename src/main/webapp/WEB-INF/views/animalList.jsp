@@ -23,12 +23,16 @@
         .selectBox{
             width: 30%;
         }
+        .petWrap,.kindCd,.age,.sexCd,.noticeSdt{
+            display:inline-block;
+        }
     </style>
 </head>
 <body>
-<div id="header">  </i> header</div>
+<div id="header"> <c:out value="${pet}"/></div>
 <div id="selectBox">
     <select name="sido" class="selectBox" id="sido">
+        <option>==>선택<==</option>
         <c:forEach var="entry" items="${sido}">
             <option value="<c:out value="${entry.key}"/>"><c:out value="${entry.value}"/> </option>
         </c:forEach>
@@ -61,16 +65,52 @@
 
 <script>
 
+    function addList(selector, value , clss){
+        if(clss == "filename")
+        {
+            var all = document.createElement('div');
+            all.setAttribute("class",clss);
+            var pic = document.createElement('img');
+            pic.setAttribute("src",value);
+            pic.setAttribute("style","width:150px");
+            all.append(pic);
+            selector.append(all);
+        }
+        else
+        {
+            var all = document.createElement('div');
+            all.setAttribute("class",clss);
+            all.appendChild(document.createTextNode(value));
+            selector.append(all);
+        }
+
+    }
     function getPetList(){
         $.ajax({
             url: "/listReturn",
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: { "sigungu": $('#sigungu').val(), "bohoso": $('#bohoso').val(), "upkind": "417000"},
+            data: { "sigungu": $('#sigungu').val(), "bohoso": $('#bohoso').val(), "upkind": "<c:out value="${petkind}"/>"},
             success: function(data) {
                 $('#petlist').empty();
-                console.log(data.officetel[0]);
+
+
+
+                // console.log(data[0].desertionNo);
+                for (i = 0 ; i < data.length; i++)
+                {
+                    var listDiv = document.createElement('div');
+                    listDiv.setAttribute("class","petWrap");
+                    addList(listDiv,data[i].filename,'filename');
+                    addList(listDiv,data[i].kindCd,'kindCd');
+                    addList(listDiv,data[i].age,'age');
+                    addList(listDiv,data[i].sexCd,'sexCd');
+                    addList(listDiv,data[i].noticeSdt,'noticeSdt');
+                    $('#petlist').append(listDiv);
+                }
+
+
 
 
             },
@@ -91,10 +131,16 @@
             data: { "sido":  $('#sido').val() , "sigungu": $('#sigungu').val()},
             success: function(data) {
                 $('#bohoso').empty();
+
+                var all = document.createElement('option');
+                all.appendChild(document.createTextNode("==>선택<=="));
+                $('#bohoso').append(all);
+
                 var all = document.createElement('option');
                 all.setAttribute("value","");
                 all.appendChild(document.createTextNode("전체"));
                 $('#bohoso').append(all);
+
                 for ( var key in data)
                 {
                     var option = document.createElement('option');
@@ -121,6 +167,9 @@
             data: { "sido":  $('#sido').val() },
             success: function(data) {
                 $('#sigungu').empty();
+                var all = document.createElement('option');
+                all.appendChild(document.createTextNode("==>선택<=="));
+                $('#sigungu').append(all);
                 for ( var key in data)
                 {
                     var option = document.createElement('option');
@@ -141,15 +190,28 @@
     $(document).ready(function(){
 
         $('#sido').change(function(){
-            getSigungu();
+            if($('#sido').val() != "==>선택<==")
+            {
+                getSigungu();
+            }
+
         })
 
         $('#sigungu').change(function(){
-            getBohoso();
+            if($('#sigungu').val() != "==>선택<==")
+            {
+                getBohoso();
+            }
+
         })
 
         $('#bohoso').change(function(){
-            getPetList();
+
+            if($('#bohoso').val() != "==>선택<==")
+            {
+                getPetList();
+            }
+
         })
 
 
