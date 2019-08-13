@@ -61,6 +61,26 @@
 
 <script>
 
+    function getPetList(){
+        $.ajax({
+            url: "/listReturn",
+            type: "get",
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: { "sigungu": $('#sigungu').val(), "bohoso": $('#bohoso').val(), "upkind": "417000"},
+            success: function(data) {
+                $('#petlist').empty();
+                $('#petlist').html('<c:out value="${petList}"/>');
+
+            },
+            error:function(error){
+                alert("에러발생");
+
+            }
+
+        });
+    }
+
     function getBohoso(){
         $.ajax({
             url: "/bohoso",
@@ -70,6 +90,10 @@
             data: { "sido":  $('#sido').val() , "sigungu": $('#sigungu').val()},
             success: function(data) {
                 $('#bohoso').empty();
+                var all = document.createElement('option');
+                all.setAttribute("value","");
+                all.appendChild(document.createTextNode("전체"));
+                $('#bohoso').append(all);
                 for ( var key in data)
                 {
                     var option = document.createElement('option');
@@ -82,7 +106,6 @@
             },
             error:function(error){
                 alert("에러발생");
-
             }
 
         });
@@ -122,6 +145,10 @@
 
         $('#sigungu').change(function(){
             getBohoso();
+        })
+
+        $('#bohoso').change(function(){
+            getPetList();
         })
 
 

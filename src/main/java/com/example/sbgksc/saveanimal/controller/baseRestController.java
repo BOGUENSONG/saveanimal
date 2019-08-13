@@ -1,5 +1,6 @@
 package com.example.sbgksc.saveanimal.controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -72,6 +74,10 @@ public class baseRestController {
         return bohoso;
     }
 
+//    축종코드 리스트
+//   - 개 : 417000
+// - 고양이 : 422400
+// - 기타 : 429900
     @RequestMapping(value="/listReturn" , method= RequestMethod.GET)
     public ArrayList listReturn(@RequestParam("sigungu")String sigungu, @RequestParam("bohoso")String bohoso, @RequestParam("upkind")String upkind) throws ParserConfigurationException, IOException, SAXException { //보호소 해시맵 리턴
         ArrayList list = new ArrayList();
@@ -208,5 +214,6 @@ public class baseRestController {
         }
         return list;
     }
+
 
 }
