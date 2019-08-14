@@ -22,8 +22,6 @@ public class baseController {
     //주소창에 localhost:8080 치면, index.jsp를 매핑해준다.
     @RequestMapping(value = "/")
     public String initIndex()  {
-
-
         return "index";
     }
 
@@ -51,6 +49,16 @@ public class baseController {
         model.addAttribute("pet","고양이");
         return "animalList";
     }
+    @RequestMapping(value ="others")
+    public String otherindex(Model model ) throws IOException, SAXException, ParserConfigurationException {
+
+        Map<String,String> sido = apiToListService.sido();
+        model.addAttribute("sido",sido);
+        model.addAttribute("petkind","429900");
+        model.addAttribute("pet","기타동물");
+        return "animalList";
+    }
+
 
 
 }

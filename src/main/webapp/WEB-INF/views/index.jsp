@@ -37,7 +37,7 @@
     <input type="button" value="강아지" class="button1" onclick="test1()">
     <input type="button" value="고양이" class="button1" onclick="test2()">
     <br>
-    <input type="button" value="기타동물" class="button2">
+    <input type="button" value="기타동물" class="button2" onclick="test3()">
     <br>
     <input type="button" value="즐겨찾기" class="button2">
 </div>
@@ -45,9 +45,11 @@
 function test1(){
     location.href = "/dogs";
 }
-function test2()
-{
+function test2() {
     location.href = "/cats";
+}
+function test3() {
+    Location.href = "/others";
 }
 </script>
 </body>
