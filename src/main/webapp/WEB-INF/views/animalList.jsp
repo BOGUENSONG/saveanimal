@@ -131,6 +131,7 @@
         var modal1 = document.getElementById('Modal1');
         var modal2 = document.getElementById('Modal2');
 
+
         // 파라미터 변환함수들 총 집합 1. 성별 바꾸기 함수
         function changesexCd(sexCd)
         {
@@ -143,7 +144,7 @@
                 return "암컷";
             }
             else{
-                return "미상";
+                return "성별 미상";
             }
         }
         // 2. 개, 고양이 딱지 제거
@@ -151,8 +152,25 @@
         {
             var kind = kindCd.replace("[개]","");
             kind = kind.replace("[고양이]","");
+            kind = kind.replace("[기타축종]","");
             return kind;
         }
+        // 3. 중성화여부 변경
+        function changeneuterYn(neuterYn)
+        {
+            if(neuterYn == "N")
+            {
+                return "중성화 X"
+            }
+            else if(neuterYn =="Y")
+            {
+                return "중성화 O"
+            }
+            else{
+                return "중성화 미상"
+            }
+        }
+
         function addList(selector, value , clss) {
             if(clss == "filename") {
                 var all = document.createElement('div');
@@ -186,15 +204,11 @@
                         listDiv.setAttribute("class","petWrap");
                         fileInfo.setAttribute("class","fileInfo");
                         listDiv.setAttribute("onclick","modalOn('"+data[i].popfile+"', '"+data[i].noticeNo+
-                            "','"+data[i].kindCd+"', '"+data[i].age+ "', '"+data[i].weight+"', '"+data[i].sexCd+"', '"+
-                            data[i].neuterYn+"', '"+data[i].specialMark+"','"+data[i].careNm+"', '"+data[i].careTel+
+                            "','"+changekindCd(data[i].kindCd)+"', '"+data[i].age+ "', '"+data[i].weight+"', '"+changesexCd(data[i].sexCd)+"', '"+
+                            changeneuterYn(data[i].neuterYn)+"', '"+data[i].specialMark+"','"+data[i].careNm+"', '"+data[i].careTel+
                             "', '"+data[i].careAddr+"','"+data[i].orgNm+"', '"+data[i].chargeNm+"', '"+data[i].officetel+"')");
                         addList(listDiv,data[i].filename,'filename');
-<<<<<<< HEAD
                         addList(fileInfo,changekindCd(data[i].kindCd),'kindCd');
-=======
-                        addList(fileInfo,data[i].kindCd,'kindCd');
->>>>>>> 881f7d5309b7fa8e4491a65f02194060f614f7a4
                         addList(fileInfo,data[i].age,'age');
                         addList(fileInfo,changesexCd(data[i].sexCd),'sexCd');
                         addList(fileInfo,data[i].noticeSdt,'noticeSdt');
