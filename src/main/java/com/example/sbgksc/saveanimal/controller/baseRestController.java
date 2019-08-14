@@ -79,7 +79,7 @@ public class baseRestController {
 // - 고양이 : 422400
 // - 기타 : 429900
     @RequestMapping(value="/listReturn" , method= RequestMethod.GET)
-    public ArrayList listReturn(@RequestParam("sigungu")String sigungu, @RequestParam("bohoso")String bohoso, @RequestParam("upkind")String upkind) throws ParserConfigurationException, IOException, SAXException { //보호소 해시맵 리턴
+    public ArrayList listReturn(@RequestParam("sigungu")String sigungu, @RequestParam("bohoso")String bohoso, @RequestParam("upkind")String upkind, @RequestParam("bgnde")String bgnde, @RequestParam("endde")String endde) throws ParserConfigurationException, IOException, SAXException { //보호소 해시맵 리턴
         ArrayList list = new ArrayList();
         String url = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic";
         url = url + "?org_cd=" + sigungu;//시군구 코드삽입
@@ -87,12 +87,8 @@ public class baseRestController {
         url = url + "&numOfRows=" + "1000";
         url = url + "&upkind=" + upkind; //축종코드 삽입
         url = url + "&state=" + "notice"; //상태코드 삽입 notice = 공고중
-        Calendar today = Calendar.getInstance();
-        String nowDate = new java.text.SimpleDateFormat("yyyyMMdd").format(today.getTime()); //현재날짜
-        today.add(Calendar.MONTH , -1);
-        String preDate = new java.text.SimpleDateFormat("yyyyMMdd").format(today.getTime()); //한달전날짜
-        url = url + "&bgnde=" + preDate; //검색시작날짜 삽입(현재의 한달전날짜)
-        url = url + "&endde=" + nowDate; //검색종료날짜 삽입(현재날짜로)
+        url = url + "&bgnde=" + bgnde; //검색시작날짜 삽입
+        url = url + "&endde=" + endde; //검색종료날짜 삽입
         url = url + "&ServiceKey=" + key; //api키값 삽입
         DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
@@ -207,7 +203,6 @@ public class baseRestController {
             each.put("officetel", value); //담당자연락처 삽입
             list.add(each); //정보값 입력한 정보값리스트 삽입
         }
-        System.out.println("리스트 크기: " + list.size());
         return list;
     }
 
