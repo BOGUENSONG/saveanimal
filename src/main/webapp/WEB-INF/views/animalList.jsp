@@ -25,6 +25,9 @@
         }
         .petWrap,.kindCd,.age,.sexCd,.noticeSdt{
             display:inline-block;
+            border: 3px solid black;
+            border-radius: 5px;
+            padding: 5px;
         }
     </style>
 </head>
@@ -34,7 +37,8 @@
     <select name="sido" class="selectBox" id="sido">
         <option>==>선택<==</option>
         <c:forEach var="entry" items="${sido}">
-            <option value="<c:out value="${entry.key}"/>"><c:out value="${entry.value}"/> </option>
+            <option value="<c:out value="${entry.
+            key}"/>"><c:out value="${entry.value}"/> </option>
         </c:forEach>
     </select>
     <select name="sigungu" class="selectBox" id="sigungu">
@@ -45,6 +49,10 @@
         <%--            <option value="<c:out value="${i[1]}"/>"><c:out value="${i[0]}"/></option>--%>
         <%--        </c:forEach>--%>
     </select>
+    <div class="dateform">
+        시작날짜: <input type="date" id="startDate"> 끝날짜: <input type="date" id="endDate"> <input type="button" value="앙">
+    </div>
+
 
 </div>
 
@@ -91,7 +99,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: { "sigungu": $('#sigungu').val(), "bohoso": $('#bohoso').val(), "upkind": "<c:out value="${petkind}"/>"},
+            data: { "sigungu": $('#sigungu').val(), "bohoso": $('#bohoso').val(), "upkind": "<c:out value="${petkind}"/>", "bgnde": $('#startDate').val(), "endde":$("#endDate").val() },
             success: function(data) {
                 $('#petlist').empty();
 
@@ -189,6 +197,11 @@
     }
     $(document).ready(function(){
 
+        var today = new Date();
+        today.setMonth(today.getMonth()-1);
+
+        document.getElementById('endDate').valueAsDate = new Date();
+        document.getElementById('startDate').valueAsDate = today;
         $('#sido').change(function(){
             if($('#sido').val() != "==>선택<==")
             {
