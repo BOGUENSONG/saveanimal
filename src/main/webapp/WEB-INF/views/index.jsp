@@ -49,7 +49,7 @@ function test2() {
     location.href = "/cats";
 }
 function test3() {
-    Location.href = "/others";
+    location.href = "/others";
 }
 </script>
 </body>
