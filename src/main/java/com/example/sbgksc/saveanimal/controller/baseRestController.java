@@ -26,7 +26,6 @@ public class baseRestController {
 
     @RequestMapping(value="/sigungu" , method= RequestMethod.GET)
     public Map<String, String> sigunguList(@RequestParam(value="sido", required=false)String sido) throws ParserConfigurationException, IOException, SAXException { //시군구 해시맵 리턴
-        System.out.println("시도 : " + sido);
         Map<String, String> sigungu = new HashMap<>();
         String url = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sigungu";
         url = url + "?upr_cd=" + sido;//시도 코드삽입
@@ -74,10 +73,6 @@ public class baseRestController {
         return bohoso;
     }
 
-//    축종코드 리스트
-//   - 개 : 417000
-// - 고양이 : 422400
-// - 기타 : 429900
     @RequestMapping(value="/listReturn" , method= RequestMethod.GET)
     public ArrayList listReturn(@RequestParam("sigungu")String sigungu, @RequestParam("bohoso")String bohoso, @RequestParam("upkind")String upkind, @RequestParam("bgnde")String bgnde, @RequestParam("endde")String endde) throws ParserConfigurationException, IOException, SAXException { //보호소 해시맵 리턴
         ArrayList list = new ArrayList();

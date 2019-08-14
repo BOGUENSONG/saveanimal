@@ -40,7 +40,7 @@ public class baseController {
         model.addAttribute("pet","강아지");
         return "animalList";
     }
-    @RequestMapping(value ="cats")
+    @RequestMapping(value ="/cats")
     public String catindex(Model model ) throws IOException, SAXException, ParserConfigurationException {
 
         Map<String,String> sido = apiToListService.sido();
@@ -49,7 +49,7 @@ public class baseController {
         model.addAttribute("pet","고양이");
         return "animalList";
     }
-    @RequestMapping(value ="others")
+    @RequestMapping(value ="/others")
     public String otherindex(Model model ) throws IOException, SAXException, ParserConfigurationException {
 
         Map<String,String> sido = apiToListService.sido();
