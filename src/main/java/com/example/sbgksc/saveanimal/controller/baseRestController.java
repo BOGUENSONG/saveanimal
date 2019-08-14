@@ -103,6 +103,7 @@ public class baseRestController {
         NodeList listpf = doc.getElementsByTagName("popfile"); //이미지파일
         NodeList listps = doc.getElementsByTagName("processState"); //상태
         NodeList listsc = doc.getElementsByTagName("sexCd"); //성별
+        NodeList listny = doc.getElementsByTagName("neuterYn"); //중성화여부
         NodeList listsm = doc.getElementsByTagName("specialMark"); //특징
         NodeList listcn = doc.getElementsByTagName("careNm"); //보호소이름
         NodeList listct = doc.getElementsByTagName("careTel"); //보호소 전화번호
@@ -168,6 +169,10 @@ public class baseRestController {
             temp= node.getFirstChild();
             value = temp.getNodeValue();
             each.put("sexCd", value); //성별 삽입
+            node = listny.item(i);
+            temp= node.getFirstChild();
+            value = temp.getNodeValue();
+            each.put("neuterYn", value); //중성화여부 삽입
             node = listsm.item(i);
             temp= node.getFirstChild();
             value = temp.getNodeValue();

@@ -157,9 +157,11 @@
                         var fileInfo = document.createElement('div');
                         listDiv.setAttribute("class","petWrap");
                         fileInfo.setAttribute("class","fileInfo");
-                        listDiv.setAttribute("onclick","modalOn('"+data[i].popfile+"', '"+data[i].noticeNo+"','"+data[i].kindCd+"', '"+data[i].age+ "', '"+data[i].weight+"')");
+                        listDiv.setAttribute("onclick","modalOn('"+data[i].popfile+"', '"+data[i].noticeNo+
+                            "','"+data[i].kindCd+"', '"+data[i].age+ "', '"+data[i].weight+"', '"+data[i].sexCd+"', '"+
+                            data[i].neuterYn+"', '"+data[i].specialMark+"','"+data[i].careNm+"', '"+data[i].careTel+
+                            "', '"+data[i].careAddr+"','"+data[i].orgNm+"', '"+data[i].chargeNm+"', '"+data[i].officetel+"')");
                         addList(listDiv,data[i].filename,'filename');
-
                         addList(fileInfo,data[i].kindCd,'kindCd');
                         addList(fileInfo,data[i].age,'age');
                         addList(fileInfo,data[i].sexCd,'sexCd');
@@ -175,7 +177,7 @@
             });
         }
 
-        function modalOn(popfile, noticeNo, kindCd, age, weight) {
+        function modalOn(popfile, noticeNo, kindCd, age, weight, sexCd, neuterYn, specialMark, careNm, careTel, careAddr, orgNm, chargeNm, officetel) {
             var nn = document.createElement("p"); //공고번호
             nn.setAttribute("id","mnoticeNo");
             nn.innerText = noticeNo;
@@ -196,6 +198,42 @@
             wg.setAttribute("id","mweight");
             wg.innerText = weight;
             modal2.appendChild(wg);
+            var sc = document.createElement("p"); //상태
+            sc.setAttribute("id","msexCd");
+            sc.innerText = sexCd;
+            modal2.appendChild(sc);
+            var ny = document.createElement("p"); //중성화여부
+            ny.setAttribute("id","mneuterYn");
+            ny.innerText = neuterYn;
+            modal2.appendChild(ny);
+            var sm = document.createElement("p"); //특이사항
+            sm.setAttribute("id","mspecialMark");
+            sm.innerText = specialMark;
+            modal2.appendChild(sm);
+            var cn = document.createElement("p"); //보호소이름
+            cn.setAttribute("id","mcareNm");
+            cn.innerText = careNm;
+            modal2.appendChild(cn);
+            var ct = document.createElement("p"); //보호소전화번호
+            ct.setAttribute("id","mcareTel");
+            ct.innerText = careTel;
+            modal2.appendChild(ct);
+            var ca = document.createElement("p"); //보호장소
+            ca.setAttribute("id","mcareAddr");
+            ca.innerText = careAddr;
+            modal2.appendChild(ca);
+            var on = document.createElement("p"); //관할기관
+            on.setAttribute("id","morgNm");
+            on.innerText = orgNm;
+            modal2.appendChild(on);
+            var ch = document.createElement("p"); //담당자
+            ch.setAttribute("id","mchargeNm");
+            ch.innerText = chargeNm;
+            modal2.appendChild(ch);
+            var ot = document.createElement("p"); //담당자연락처
+            ot.setAttribute("id","mofficetel");
+            ot.innerText = officetel;
+            modal2.appendChild(ot);
             modal1.style.display = "block";
         }
 
@@ -210,6 +248,24 @@
             modal2.removeChild(ag);
             var wg = document.getElementById("mweight");
             modal2.removeChild(wg);
+            var sc = document.getElementById("msexCd");
+            modal2.removeChild(sc);
+            var ny = document.getElementById("mneuterYn");
+            modal2.removeChild(ny);
+            var sm = document.getElementById("mspecialMark");
+            modal2.removeChild(sm);
+            var cn = document.getElementById("mcareNm");
+            modal2.removeChild(cn);
+            var ct = document.getElementById("mcareTel");
+            modal2.removeChild(ct);
+            var ca = document.getElementById("mcareAddr");
+            modal2.removeChild(ca);
+            var on = document.getElementById("morgNm");
+            modal2.removeChild(on);
+            var ch = document.getElementById("mchargeNm");
+            modal2.removeChild(ch);
+            var ot = document.getElementById("mofficetel");
+            modal2.removeChild(ot);
             modal1.style.display = "none";
         }
 
