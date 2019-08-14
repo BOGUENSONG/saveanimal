@@ -7,6 +7,9 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style type="text/css">
+        p{
+            margin: 0;
+        }
         .dateform{
             min-width:450px;
         }
@@ -80,15 +83,18 @@
             color: black;
             text-align: center;
             background-color: #fefefe;
-            margin : auto;
-            margin-top : 375px;
-            width: 1000px;
-            height: 1000px;
-            border: 1px solid #888;
+            margin :20%;
+            width: 50%;
+            height: auto;
+            border: 3px solid #888;
+            border-radius: 10px;
         }
         .modal-content img{
-            height: 500px;
-            width: 500px;
+            width: 70%;
+
+        }
+        .kindCd{
+            color: blue;
         }
 
     </style>
@@ -125,6 +131,28 @@
         var modal1 = document.getElementById('Modal1');
         var modal2 = document.getElementById('Modal2');
 
+        // 파라미터 변환함수들 총 집합 1. 성별 바꾸기 함수
+        function changesexCd(sexCd)
+        {
+            if (sexCd == "M")
+            {
+                return "수컷";
+            }
+            else if(sexCd == "Q")
+            {
+                return "암컷";
+            }
+            else{
+                return "미상";
+            }
+        }
+        // 2. 개, 고양이 딱지 제거
+        function changekindCd(kindCd)
+        {
+            var kind = kindCd.replace("[개]","");
+            kind = kind.replace("[고양이]","");
+            return kind;
+        }
         function addList(selector, value , clss) {
             if(clss == "filename") {
                 var all = document.createElement('div');
@@ -159,10 +187,9 @@
                         fileInfo.setAttribute("class","fileInfo");
                         listDiv.setAttribute("onclick","modalOn('"+data[i].popfile+"', '"+data[i].noticeNo+"','"+data[i].kindCd+"', '"+data[i].age+ "', '"+data[i].weight+"')");
                         addList(listDiv,data[i].filename,'filename');
-
-                        addList(fileInfo,data[i].kindCd,'kindCd');
+                        addList(fileInfo,changekindCd(data[i].kindCd),'kindCd');
                         addList(fileInfo,data[i].age,'age');
-                        addList(fileInfo,data[i].sexCd,'sexCd');
+                        addList(fileInfo,changesexCd(data[i].sexCd),'sexCd');
                         addList(fileInfo,data[i].noticeSdt,'noticeSdt');
                         listDiv.append(fileInfo);
                         $('#petlist').append(listDiv);

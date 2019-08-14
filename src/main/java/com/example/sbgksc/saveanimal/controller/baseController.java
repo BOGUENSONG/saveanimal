@@ -55,7 +55,7 @@ public class baseController {
         Map<String,String> sido = apiToListService.sido();
         model.addAttribute("sido",sido);
         model.addAttribute("petkind","429900");
-        model.addAttribute("pet","기타동물");
+        model.addAttribute("pet","fish");
         return "animalList";
     }
 
