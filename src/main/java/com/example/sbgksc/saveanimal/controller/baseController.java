@@ -37,7 +37,7 @@ public class baseController {
         Map<String,String> sido = apiToListService.sido();
         model.addAttribute("sido",sido);
         model.addAttribute("petkind","417000");
-        model.addAttribute("pet","강아지");
+        model.addAttribute("pet","dog");
         return "animalList";
     }
     @RequestMapping(value ="/cats")
@@ -46,7 +46,7 @@ public class baseController {
         Map<String,String> sido = apiToListService.sido();
         model.addAttribute("sido",sido);
         model.addAttribute("petkind","422400");
-        model.addAttribute("pet","고양이");
+        model.addAttribute("pet","cat");
         return "animalList";
     }
     @RequestMapping(value ="/others")

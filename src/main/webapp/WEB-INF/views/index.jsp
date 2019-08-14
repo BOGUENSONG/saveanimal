@@ -26,6 +26,9 @@
             width:325px;
             height: 50px;
         }
+        body{
+            background: linear-gradient( to bottom, skyblue, white );
+        }
 
 
     </style>
