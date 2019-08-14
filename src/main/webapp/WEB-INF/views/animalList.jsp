@@ -5,34 +5,68 @@
 <head>
     <title>테스트 페이지</title>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style type="text/css">
+        .dateform{
+            min-width:450px;
+        }
+        #back{
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        #back:hover{
+            cursor: pointer;
+        }
+        .petTitle{
+            margin-top:10px;
+            margin-left: 40%;
+            color: black;
+            width: 40px;
+        }
         body{
             margin: 0 auto;
         }
         #header{
-            height: 80px;
+            height: 60px;
             color: white;
-            background-color:black;
+            background: linear-gradient( to bottom, skyblue, white );
+
         }
         #selectBox{
             height:50px;
             color: white;
-            background-color: blueviolet;
+            background-color: deepskyblue;
         }
         .selectBox{
             width: 30%;
         }
         .petWrap,.kindCd,.age,.sexCd,.noticeSdt{
             display:inline-block;
-            border: 3px solid black;
+            width: 140px;
+        }
+        .petWrap{
+            border: 3px double deepskyblue;
             border-radius: 5px;
             padding: 5px;
+            width: 310px;
+        }
+        .filename{
+            width:150px;
+            display:inline-block;;
+        }
+        .fileInfo{
+            border-left: 2px solid black;
+            width:130px;
+            display:inline-block;
+            height: 130px;
+            float: right;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
-<div id="header"> <c:out value="${pet}"/></div>
+<div id="header"> <img src="/resources/img/arrow-alt-circle-left-solid.svg" width="40px" id="back">
+    <img src="/resources/img/<c:out value="${pet}"/>-solid.svg" class="petTitle"> </div>
 <div id="selectBox">
     <select name="sido" class="selectBox" id="sido">
         <option>==>선택<==</option>
@@ -50,7 +84,7 @@
         <%--        </c:forEach>--%>
     </select>
     <div class="dateform">
-        시작날짜: <input type="date" id="startDate"> 끝날짜: <input type="date" id="endDate"> <input type="button" value="앙">
+        시작날짜: <input type="date" id="startDate"> 끝날짜: <input type="date" id="endDate"> <input type="button" value="조회" onclick="getPetList()">
     </div>
 
 
@@ -63,7 +97,7 @@
 
 </div>
 
-<div id="petlist">list
+<div id="petlist">
 
 </div>
 <%--<div> 테스트 :<c:out value="${test2}"></c:out></div>--%>
@@ -80,7 +114,7 @@
             all.setAttribute("class",clss);
             var pic = document.createElement('img');
             pic.setAttribute("src",value);
-            pic.setAttribute("style","width:150px");
+            pic.setAttribute("style","width:150px; height:140;");
             all.append(pic);
             selector.append(all);
         }
@@ -109,13 +143,19 @@
                 for (i = 0 ; i < data.length; i++)
                 {
                     var listDiv = document.createElement('div');
+                    var fileInfo = document.createElement('div');
                     listDiv.setAttribute("class","petWrap");
+                    fileInfo.setAttribute("class","fileInfo");
                     addList(listDiv,data[i].filename,'filename');
-                    addList(listDiv,data[i].kindCd,'kindCd');
-                    addList(listDiv,data[i].age,'age');
-                    addList(listDiv,data[i].sexCd,'sexCd');
-                    addList(listDiv,data[i].noticeSdt,'noticeSdt');
+
+
+                    addList(fileInfo,data[i].kindCd,'kindCd');
+                    addList(fileInfo,data[i].age,'age');
+                    addList(fileInfo,data[i].sexCd,'sexCd');
+                    addList(fileInfo,data[i].noticeSdt,'noticeSdt');
+                    listDiv.append(fileInfo);
                     $('#petlist').append(listDiv);
+
                 }
 
 
@@ -195,6 +235,9 @@
 
         });
     }
+    $('#back').on('click',function(){
+        history.back();
+    })
     $(document).ready(function(){
 
         var today = new Date();
