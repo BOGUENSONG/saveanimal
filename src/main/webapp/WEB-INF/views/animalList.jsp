@@ -96,6 +96,7 @@
 <body>
 <div id="header"> <img src="/resources/img/arrow-alt-circle-left-solid.svg" width="40px" id="back">
     <img src="/resources/img/<c:out value="${pet}"/>-solid.svg" class="petTitle"> </div>
+
 <div id="selectBox">
     <select name="sido" class="selectBox" id="sido">
         <option>==>선택<==</option>
@@ -117,194 +118,180 @@
         </div>
     </div>
 </div>
-</div>
-<<<<<<< HEAD
 
 <div id="petlist">
-
-=======
-<div id="petlist">list
->>>>>>> 1ebefea56b476092ae770d089a684029c0977e51
 </div>
+    <script>
+        var modal1 = document.getElementById('Modal1');
+        var modal2 = document.getElementById('Modal2');
 
-<script>
-    var modal1 = document.getElementById('Modal1');
-    var modal2 = document.getElementById('Modal2');
+        function addList(selector, value , clss) {
+            if(clss == "filename") {
+                var all = document.createElement('div');
+                all.setAttribute("class",clss);
+                var pic = document.createElement('img');
+                pic.setAttribute("src",value);
+                pic.setAttribute("style","width:150px; height:140;");
+                all.append(pic);
+                selector.append(all);
+            }
+            else {
+                var all = document.createElement('div');
+                all.setAttribute("class",clss);
+                all.appendChild(document.createTextNode(value));
+                selector.append(all);
+            }
 
-    function addList(selector, value , clss) {
-        if(clss == "filename") {
-            var all = document.createElement('div');
-            all.setAttribute("class",clss);
-            var pic = document.createElement('img');
-            pic.setAttribute("src",value);
-            pic.setAttribute("style","width:150px; height:140;");
-            all.append(pic);
-            selector.append(all);
         }
-        else {
-            var all = document.createElement('div');
-            all.setAttribute("class",clss);
-            all.appendChild(document.createTextNode(value));
-            selector.append(all);
+        function getPetList() {
+            $.ajax({
+                url: "/listReturn",
+                type: "get",
+                dataType: "json",
+                contentType:'application/json; charset=utf-8',
+                data: { "sigungu": $('#sigungu').val(), "bohoso": $('#bohoso').val(), "upkind": "<c:out value="${petkind}"/>", "bgnde": $('#startDate').val(), "endde":$("#endDate").val() },
+                success: function(data) {
+                    $('#petlist').empty();
+                    for (i = 0 ; i < data.length; i++) {
+                        var listDiv = document.createElement('div');
+                        var fileInfo = document.createElement('div');
+                        listDiv.setAttribute("class","petWrap");
+                        fileInfo.setAttribute("class","fileInfo");
+                        listDiv.setAttribute("onclick","modalOn('"+data[i].popfile+"', '"+data[i].noticeNo+"','"+data[i].kindCd+"', '"+data[i].age+ "', '"+data[i].weight+"')");
+                        addList(listDiv,data[i].filename,'filename');
+
+                        addList(fileInfo,data[i].kindCd,'kindCd');
+                        addList(fileInfo,data[i].age,'age');
+                        addList(fileInfo,data[i].sexCd,'sexCd');
+                        addList(fileInfo,data[i].noticeSdt,'noticeSdt');
+                        listDiv.append(fileInfo);
+                        $('#petlist').append(listDiv);
+
+                    }
+                },
+                error:function(error) {
+                    alert("에러발생");
+                }
+            });
         }
 
-    }
-    function getPetList() {
-        $.ajax({
-            url: "/listReturn",
-            type: "get",
-            dataType: "json",
-            contentType:'application/json; charset=utf-8',
-            data: { "sigungu": $('#sigungu').val(), "bohoso": $('#bohoso').val(), "upkind": "<c:out value="${petkind}"/>", "bgnde": $('#startDate').val(), "endde":$("#endDate").val() },
-            success: function(data) {
-                $('#petlist').empty();
-                for (i = 0 ; i < data.length; i++) {
-                    var listDiv = document.createElement('div');
-                    var fileInfo = document.createElement('div');
-                    listDiv.setAttribute("class","petWrap");
-<<<<<<< HEAD
-                    fileInfo.setAttribute("class","fileInfo");
-=======
-                    listDiv.setAttribute("onclick","modalOn('"+data[i].popfile+"', '"+data[i].noticeNo+"','"+data[i].kindCd+"', '"+data[i].age+ "', '"+data[i].weight+"')");
->>>>>>> 1ebefea56b476092ae770d089a684029c0977e51
-                    addList(listDiv,data[i].filename,'filename');
+        function modalOn(popfile, noticeNo, kindCd, age, weight) {
+            var nn = document.createElement("p"); //공고번호
+            nn.setAttribute("id","mnoticeNo");
+            nn.innerText = noticeNo;
+            modal2.appendChild(nn);
+            var pf = document.createElement("img"); //이미지
+            pf.setAttribute("id","mpopfile");
+            pf.src = popfile;
+            modal2.appendChild(pf);
+            var kc = document.createElement("p"); //품종
+            kc.setAttribute("id","mkindCd");
+            kc.innerText = kindCd;
+            modal2.appendChild(kc);
+            var ag = document.createElement("p"); //나이
+            ag.setAttribute("id","mage");
+            ag.innerText = age;
+            modal2.appendChild(ag);
+            var wg = document.createElement("p"); //무게
+            wg.setAttribute("id","mweight");
+            wg.innerText = weight;
+            modal2.appendChild(wg);
+            modal1.style.display = "block";
+        }
 
+        function modalOff() {
+            var pf = document.getElementById("mpopfile");
+            modal2.removeChild(pf);
+            var nn = document.getElementById("mnoticeNo");
+            modal2.removeChild(nn);
+            var kc = document.getElementById("mkindCd");
+            modal2.removeChild(kc);
+            var ag = document.getElementById("mage");
+            modal2.removeChild(ag);
+            var wg = document.getElementById("mweight");
+            modal2.removeChild(wg);
+            modal1.style.display = "none";
+        }
 
-                    addList(fileInfo,data[i].kindCd,'kindCd');
-                    addList(fileInfo,data[i].age,'age');
-                    addList(fileInfo,data[i].sexCd,'sexCd');
-                    addList(fileInfo,data[i].noticeSdt,'noticeSdt');
-                    listDiv.append(fileInfo);
-                    $('#petlist').append(listDiv);
-
+        function getBohoso() {
+            $.ajax({
+                url: "/bohoso",
+                type: "get",
+                dataType: "json",
+                contentType:'application/json; charset=utf-8',
+                data: { "sido":  $('#sido').val() , "sigungu": $('#sigungu').val()},
+                success: function(data) {
+                    $('#bohoso').empty();
+                    var all = document.createElement('option');
+                    all.appendChild(document.createTextNode("==>선택<=="));
+                    $('#bohoso').append(all);
+                    var all = document.createElement('option');
+                    all.setAttribute("value","");
+                    all.appendChild(document.createTextNode("전체"));
+                    $('#bohoso').append(all);
+                    for ( var key in data) {
+                        var option = document.createElement('option');
+                        option.setAttribute("value",key);
+                        option.appendChild(document.createTextNode(data[key]));
+                        $('#bohoso').append(option);
+                    }
+                },
+                error:function(error) {
+                    alert("에러발생");
                 }
-            },
-            error:function(error) {
-                alert("에러발생");
-            }
-        });
-    }
+            });
+        }
 
-    function modalOn(popfile, noticeNo, kindCd, age, weight) {
-        var nn = document.createElement("p"); //공고번호
-        nn.setAttribute("id","mnoticeNo");
-        nn.innerText = noticeNo;
-        modal2.appendChild(nn);
-        var pf = document.createElement("img"); //이미지
-        pf.setAttribute("id","mpopfile");
-        pf.src = popfile;
-        modal2.appendChild(pf);
-        var kc = document.createElement("p"); //품종
-        kc.setAttribute("id","mkindCd");
-        kc.innerText = kindCd;
-        modal2.appendChild(kc);
-        var ag = document.createElement("p"); //나이
-        ag.setAttribute("id","mage");
-        ag.innerText = age;
-        modal2.appendChild(ag);
-        var wg = document.createElement("p"); //무게
-        wg.setAttribute("id","mweight");
-        wg.innerText = weight;
-        modal2.appendChild(wg);
-        modal1.style.display = "block";
-    }
-
-    function modalOff() {
-        var pf = document.getElementById("mpopfile");
-        modal2.removeChild(pf);
-        var nn = document.getElementById("mnoticeNo");
-        modal2.removeChild(nn);
-        var kc = document.getElementById("mkindCd");
-        modal2.removeChild(kc);
-        var ag = document.getElementById("mage");
-        modal2.removeChild(ag);
-        var wg = document.getElementById("mweight");
-        modal2.removeChild(wg);
-        modal1.style.display = "none";
-    }
-
-    function getBohoso() {
-        $.ajax({
-            url: "/bohoso",
-            type: "get",
-            dataType: "json",
-            contentType:'application/json; charset=utf-8',
-            data: { "sido":  $('#sido').val() , "sigungu": $('#sigungu').val()},
-            success: function(data) {
-                $('#bohoso').empty();
-                var all = document.createElement('option');
-                all.appendChild(document.createTextNode("==>선택<=="));
-                $('#bohoso').append(all);
-                var all = document.createElement('option');
-                all.setAttribute("value","");
-                all.appendChild(document.createTextNode("전체"));
-                $('#bohoso').append(all);
-                for ( var key in data) {
-                    var option = document.createElement('option');
-                    option.setAttribute("value",key);
-                    option.appendChild(document.createTextNode(data[key]));
-                    $('#bohoso').append(option);
+        function getSigungu() {
+            $.ajax({
+                url: "/sigungu",
+                type: "get",
+                dataType: "json",
+                contentType:'application/json; charset=utf-8',
+                data: { "sido":  $('#sido').val() },
+                success: function(data) {
+                    $('#sigungu').empty();
+                    var all = document.createElement('option');
+                    all.appendChild(document.createTextNode("==>선택<=="));
+                    $('#sigungu').append(all);
+                    for ( var key in data) {
+                        var option = document.createElement('option');
+                        option.setAttribute("value",key);
+                        option.appendChild(document.createTextNode(data[key]));
+                        $('#sigungu').append(option);
+                    }
+                },
+                error:function(error) {
+                    alert("에러발생");
                 }
-            },
-            error:function(error) {
-                alert("에러발생");
-            }
-        });
-    }
+            });
+        }
 
-    function getSigungu() {
-        $.ajax({
-            url: "/sigungu",
-            type: "get",
-            dataType: "json",
-            contentType:'application/json; charset=utf-8',
-            data: { "sido":  $('#sido').val() },
-            success: function(data) {
-                $('#sigungu').empty();
-                var all = document.createElement('option');
-                all.appendChild(document.createTextNode("==>선택<=="));
-                $('#sigungu').append(all);
-                for ( var key in data) {
-                    var option = document.createElement('option');
-                    option.setAttribute("value",key);
-                    option.appendChild(document.createTextNode(data[key]));
-                    $('#sigungu').append(option);
+        $('#back').on('click',function(){
+            history.back();
+        })
+        $(document).ready(function() {
+            var today = new Date();
+            today.setMonth(today.getMonth()-1);
+            document.getElementById('endDate').valueAsDate = new Date();
+            document.getElementById('startDate').valueAsDate = today;
+            $('#sido').change(function(){
+                if($('#sido').val() != "==>선택<==") {
+                    getSigungu();
                 }
-            },
-            error:function(error) {
-                alert("에러발생");
-            }
-        });
-    }
-<<<<<<< HEAD
-    $('#back').on('click',function(){
-        history.back();
-    })
-    $(document).ready(function(){
-
-=======
-    $(document).ready(function() {
->>>>>>> 1ebefea56b476092ae770d089a684029c0977e51
-        var today = new Date();
-        today.setMonth(today.getMonth()-1);
-        document.getElementById('endDate').valueAsDate = new Date();
-        document.getElementById('startDate').valueAsDate = today;
-        $('#sido').change(function(){
-            if($('#sido').val() != "==>선택<==") {
-                getSigungu();
-            }
+            })
+            $('#sigungu').change(function(){
+                if($('#sigungu').val() != "==>선택<==") {
+                    getBohoso();
+                }
+            })
+            $('#bohoso').change(function() {
+                if($('#bohoso').val() != "==>선택<==") {
+                    getPetList();
+                }
+            })
         })
-        $('#sigungu').change(function(){
-            if($('#sigungu').val() != "==>선택<==") {
-                getBohoso();
-            }
-        })
-        $('#bohoso').change(function() {
-            if($('#bohoso').val() != "==>선택<==") {
-                getPetList();
-            }
-        })
-    })
-</script>
+    </script>
 </body>
+
 </html>
