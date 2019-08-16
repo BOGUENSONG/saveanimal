@@ -96,7 +96,6 @@
         .kindCd{
             color: blue;
         }
-
     </style>
 </head>
 <body>
@@ -144,7 +143,7 @@
                 return "암컷";
             }
             else{
-                return "성별 미상";
+                return "미상";
             }
         }
         // 2. 개, 고양이 딱지 제거
@@ -160,14 +159,14 @@
         {
             if(neuterYn == "N")
             {
-                return "중성화 X"
+                return "X"
             }
             else if(neuterYn =="Y")
             {
-                return "중성화 O"
+                return "O"
             }
             else{
-                return "중성화 미상"
+                return "미상"
             }
         }
 
@@ -226,7 +225,7 @@
         function modalOn(popfile, noticeNo, kindCd, age, weight, sexCd, neuterYn, specialMark, careNm, careTel, careAddr, orgNm, chargeNm, officetel) {
             var nn = document.createElement("p"); //공고번호
             nn.setAttribute("id","mnoticeNo");
-            nn.innerText = noticeNo;
+            nn.innerText = "공고번호 : " + noticeNo;
             modal2.appendChild(nn);
             var pf = document.createElement("img"); //이미지
             pf.setAttribute("id","mpopfile");
@@ -234,51 +233,51 @@
             modal2.appendChild(pf);
             var kc = document.createElement("p"); //품종
             kc.setAttribute("id","mkindCd");
-            kc.innerText = kindCd;
+            kc.innerText = "품종 : " + kindCd;
             modal2.appendChild(kc);
             var ag = document.createElement("p"); //나이
             ag.setAttribute("id","mage");
-            ag.innerText = age;
+            ag.innerText = "나이 : " + age;
             modal2.appendChild(ag);
             var wg = document.createElement("p"); //무게
             wg.setAttribute("id","mweight");
-            wg.innerText = weight;
+            wg.innerText = "무게 : " + weight;
             modal2.appendChild(wg);
-            var sc = document.createElement("p"); //상태
+            var sc = document.createElement("p"); //성별
             sc.setAttribute("id","msexCd");
-            sc.innerText = sexCd;
+            sc.innerText = "성별 : " + sexCd;
             modal2.appendChild(sc);
             var ny = document.createElement("p"); //중성화여부
             ny.setAttribute("id","mneuterYn");
-            ny.innerText = neuterYn;
+            ny.innerText = "중성화여부 : " + neuterYn;
             modal2.appendChild(ny);
             var sm = document.createElement("p"); //특이사항
             sm.setAttribute("id","mspecialMark");
-            sm.innerText = specialMark;
+            sm.innerText = "특이사항 : " + specialMark;
             modal2.appendChild(sm);
             var cn = document.createElement("p"); //보호소이름
             cn.setAttribute("id","mcareNm");
-            cn.innerText = careNm;
+            cn.innerText = "보호소이름 : " + careNm;
             modal2.appendChild(cn);
             var ct = document.createElement("p"); //보호소전화번호
             ct.setAttribute("id","mcareTel");
-            ct.innerText = careTel;
+            ct.innerText = "보호소 전화번호 : " + careTel;
             modal2.appendChild(ct);
             var ca = document.createElement("p"); //보호장소
             ca.setAttribute("id","mcareAddr");
-            ca.innerText = careAddr;
+            ca.innerText = "보호장소 : " + careAddr;
             modal2.appendChild(ca);
             var on = document.createElement("p"); //관할기관
             on.setAttribute("id","morgNm");
-            on.innerText = orgNm;
+            on.innerText = "관할기관 : " + orgNm;
             modal2.appendChild(on);
             var ch = document.createElement("p"); //담당자
             ch.setAttribute("id","mchargeNm");
-            ch.innerText = chargeNm;
+            ch.innerText = "담당자 : " + chargeNm;
             modal2.appendChild(ch);
             var ot = document.createElement("p"); //담당자연락처
             ot.setAttribute("id","mofficetel");
-            ot.innerText = officetel;
+            ot.innerText = "담당자연락처 : " + officetel;
             modal2.appendChild(ot);
             modal1.style.display = "block";
         }
