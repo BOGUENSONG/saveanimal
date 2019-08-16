@@ -77,6 +77,7 @@ public class baseRestController {
     public ArrayList listReturn(@RequestParam("sigungu")String sigungu, @RequestParam("bohoso")String bohoso, @RequestParam("upkind")String upkind, @RequestParam("bgnde")String bgnde, @RequestParam("endde")String endde) throws ParserConfigurationException, IOException, SAXException { //보호소 해시맵 리턴
         ArrayList list = new ArrayList();
         String url = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic";
+
         url = url + "?org_cd=" + sigungu;//시군구 코드삽입
         url = url + "&care_reg_no=" + bohoso;//보호소 코드삽입 ("전체"라는 보호소값 생성바람, "전체"의 value는 ""로 설정)
         url = url + "&numOfRows=" + "1000";

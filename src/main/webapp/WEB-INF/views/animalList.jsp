@@ -4,14 +4,17 @@
 <html>
 <head>
     <title>테스트 페이지</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap" rel="stylesheet">
     <style type="text/css">
         p{
             margin: 0;
         }
         .dateform{
-            min-width:450px;
+            min-width:360px;
+            font-size: 12px;
         }
         #back{
             margin-left: 10px;
@@ -28,6 +31,7 @@
         }
         body{
             margin: 0 auto;
+            font-family: 'Gamja Flower', cursive;
         }
         #header{
             height: 60px;
@@ -83,11 +87,12 @@
             color: black;
             text-align: center;
             background-color: #fefefe;
-            margin :20%;
-            width: 50%;
+            margin :15%;
+            width: 70%;
             height: auto;
             border: 3px solid #888;
             border-radius: 10px;
+            font-size: 12px;
         }
         .modal-content img{
             width: 70%;
@@ -115,7 +120,7 @@
     <select name="bohoso" class="selectBox" id="bohoso">
     </select>
     <div class="dateform">
-        시작날짜: <input type="date" id="startDate"> 끝날짜: <input type="date" id="endDate"> <input type="button" value="조회" onclick="getPetList()">
+        시작날짜: <input type="date" id="startDate"> 끝날짜: <input type="date" id="endDate">
     </div>
     <div id="Modal1" class="modal">
         <div id = "Modal2" class="modal-content">
@@ -206,7 +211,7 @@
                             "','"+changekindCd(data[i].kindCd)+"', '"+data[i].age+ "', '"+data[i].weight+"', '"+changesexCd(data[i].sexCd)+"', '"+
                             changeneuterYn(data[i].neuterYn)+"', '"+data[i].specialMark+"','"+data[i].careNm+"', '"+data[i].careTel+
                             "', '"+data[i].careAddr+"','"+data[i].orgNm+"', '"+data[i].chargeNm+"', '"+data[i].officetel+"')");
-                        addList(listDiv,data[i].filename,'filename');
+                        addList(listDiv,data[i].popfile,'filename');
                         addList(fileInfo,changekindCd(data[i].kindCd),'kindCd');
                         addList(fileInfo,data[i].age,'age');
                         addList(fileInfo,changesexCd(data[i].sexCd),'sexCd');
@@ -217,7 +222,7 @@
                     }
                 },
                 error:function(error) {
-                    alert("에러발생");
+                    alert("먼저, 지역을 선택하세요.");
                 }
             });
         }
@@ -356,6 +361,7 @@
                     $('#sigungu').empty();
                     var all = document.createElement('option');
                     all.appendChild(document.createTextNode("==>선택<=="));
+
                     $('#sigungu').append(all);
                     for ( var key in data) {
                         var option = document.createElement('option');
@@ -393,6 +399,22 @@
                     getPetList();
                 }
             })
+            $('#startDate').change(function(){
+                getPetList();
+            })
+            $('#endDate').change(function(){
+                if($('#endDate').val() < $('#startDate').val())
+                {
+                    alert("끝날짜는 시작날짜보다 커야합니다.");
+                    document.getElementById('endDate').valueAsDate = new Date();
+                }
+                else
+                {
+                    getPetList();
+                }
+
+            })
+
         })
     </script>
 </body>
