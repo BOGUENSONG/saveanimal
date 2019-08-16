@@ -259,8 +259,9 @@
             cn.setAttribute("id","mcareNm");
             cn.innerText = "보호소이름 : " + careNm;
             modal2.appendChild(cn);
-            var ct = document.createElement("p"); //보호소전화번호
+            var ct = document.createElement("a"); //보호소전화번호
             ct.setAttribute("id","mcareTel");
+            ct.setAttribute("href", "tel:" + careTel);
             ct.innerText = "보호소 전화번호 : " + careTel;
             modal2.appendChild(ct);
             var ca = document.createElement("p"); //보호장소
@@ -275,8 +276,9 @@
             ch.setAttribute("id","mchargeNm");
             ch.innerText = "담당자 : " + chargeNm;
             modal2.appendChild(ch);
-            var ot = document.createElement("p"); //담당자연락처
+            var ot = document.createElement("a"); //담당자연락처
             ot.setAttribute("id","mofficetel");
+            ot.setAttribute("href", "tel:" + officetel);
             ot.innerText = "담당자연락처 : " + officetel;
             modal2.appendChild(ot);
             modal1.style.display = "block";
